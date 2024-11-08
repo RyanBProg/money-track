@@ -1,4 +1,9 @@
-export default function TransactionSort({ sortMethod, setSortMethod }) {
+type Props = {
+  sortMethod: string;
+  setSortMethod: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export default function TransactionSort({ sortMethod, setSortMethod }: Props) {
   return (
     <div className="transaction-sort">
       <label htmlFor="sort-select">Sort: </label>

@@ -1,8 +1,13 @@
-import { useState } from "react";
-import makeRequest from "../utils/makeRequest";
+import { FormEvent, useState } from "react";
+import { makeRequest } from "../utils/makeRequest";
 import { useAppContext } from "../context/AppContext";
+import { TransactionType } from "../types/types";
 
-export default function Transaction({ transaction }) {
+type Props = {
+  transaction: TransactionType;
+};
+
+export default function Transaction({ transaction }: Props) {
   const [editMode, setEditMode] = useState(false);
 
   return (
@@ -16,7 +21,12 @@ export default function Transaction({ transaction }) {
   );
 }
 
-function TransactionView({ transaction, setEditMode }) {
+type TransactionProps = {
+  transaction: TransactionType;
+  setEditMode: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+function TransactionView({ transaction, setEditMode }: TransactionProps) {
   const {
     setTransactionsData,
     setLoading,
@@ -58,7 +68,7 @@ function TransactionView({ transaction, setEditMode }) {
   );
 }
 
-function TransactionEdit({ transaction, setEditMode }) {
+function TransactionEdit({ transaction, setEditMode }: TransactionProps) {
   const {
     setTransactionsData,
     setLoading,
@@ -73,7 +83,7 @@ function TransactionEdit({ transaction, setEditMode }) {
   const [isExpense, setIsExpense] = useState(transaction.isExpense);
   const [description, setDescription] = useState(transaction.description);
 
-  async function updateTransaction(e) {
+  async function updateTransaction(e: FormEvent) {
     e.preventDefault();
     setLoading(true);
     const body = {

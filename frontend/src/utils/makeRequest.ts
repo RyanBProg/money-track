@@ -1,4 +1,11 @@
-async function makeRequest(method, body, page, limit) {
+import { RequestBody } from "../types/types";
+
+export async function makeRequest(
+  method: string,
+  body: RequestBody,
+  page: number,
+  limit: number
+) {
   const url = `${process.env.REACT_APP_API_URL}/transactions?page=${page}&limit=${limit}`;
 
   const response = await fetch(url, {
@@ -10,5 +17,3 @@ async function makeRequest(method, body, page, limit) {
   const jsonData = await response.json();
   return jsonData;
 }
-
-module.exports = makeRequest;

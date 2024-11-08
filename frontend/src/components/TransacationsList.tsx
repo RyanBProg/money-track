@@ -1,9 +1,17 @@
 import { useAppContext } from "../context/AppContext";
 import Transaction from "./Transaction";
-import TransactionSort from "../components/TransactionSort";
+import TransactionSort from "./TransactionSort";
 import { sortTransactions } from "../utils/sortTransactions";
 
-export default function TransacationsList({ sortMethod, setSortMethod }) {
+type TransactionProps = {
+  sortMethod: string;
+  setSortMethod: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export default function TransacationsList({
+  sortMethod,
+  setSortMethod,
+}: TransactionProps) {
   const { transactionsData } = useAppContext();
 
   return (

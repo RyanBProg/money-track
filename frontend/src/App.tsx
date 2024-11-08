@@ -3,7 +3,7 @@ import "./App.css";
 import TransacationsList from "./components/TransacationsList";
 import TransactionForm from "./components/TransactionForm";
 import Pagination from "./components/Pagination";
-import makeRequest from "./utils/makeRequest";
+import { makeRequest } from "./utils/makeRequest";
 import { useAppContext } from "./context/AppContext";
 
 export default function App() {

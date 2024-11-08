@@ -1,6 +1,6 @@
-import { useState } from "react";
-import makeRequest from "../utils/makeRequest";
+import { FormEvent, useState } from "react";
 import { useAppContext } from "../context/AppContext";
+import { makeRequest } from "../utils/makeRequest";
 
 export default function TransactionForm() {
   const {
@@ -17,7 +17,7 @@ export default function TransactionForm() {
   const [isExpense, setIsExpense] = useState(false);
   const [description, setDescription] = useState("");
 
-  async function addNewTransaction(e) {
+  async function addNewTransaction(e: FormEvent) {
     e.preventDefault();
     setLoading(true);
 
