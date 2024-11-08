@@ -23,7 +23,7 @@ export default function App() {
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const data = await makeRequest("GET", {}, currentPage, limit);
+      const data = await makeRequest("GET", undefined, currentPage, limit);
       setTransactionsData(data);
       setTotalPages(data.totalPages);
       setBalance(data.total.toFixed(2).toString());

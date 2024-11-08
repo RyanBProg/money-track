@@ -2,11 +2,13 @@ import { RequestBody } from "../types/types";
 
 export async function makeRequest(
   method: string,
-  body: RequestBody,
+  body: RequestBody | undefined,
   page: number,
   limit: number
 ) {
-  const url = `${process.env.REACT_APP_API_URL}/transactions?page=${page}&limit=${limit}`;
+  const url = `${
+    import.meta.env.VITE_API_URL
+  }/transactions?page=${page}&limit=${limit}`;
 
   const response = await fetch(url, {
     method,
