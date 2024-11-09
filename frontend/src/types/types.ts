@@ -26,8 +26,8 @@ export type RequestBody = {
 };
 
 export type AppContextType = {
-  transactionsData: Transactions | [];
-  setTransactionsData: React.Dispatch<React.SetStateAction<Transactions | []>>;
+  transactionsData: Transactions;
+  setTransactionsData: React.Dispatch<React.SetStateAction<Transactions>>;
   loading: boolean;
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   currentPage: number;

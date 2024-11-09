@@ -3,10 +3,17 @@ import { AppContextType, Transactions } from "../types/types";
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
+const initialData = {
+  transactions: [],
+  total: 0,
+  totalItems: 0,
+  totalPages: 0,
+  currentPage: 1,
+};
+
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [transactionsData, setTransactionsData] = useState<Transactions | []>(
-    []
-  );
+  const [transactionsData, setTransactionsData] =
+    useState<Transactions>(initialData);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [balance, setBalance] = useState<string>("");

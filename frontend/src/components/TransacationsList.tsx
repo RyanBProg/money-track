@@ -2,6 +2,7 @@ import { useAppContext } from "../context/AppContext";
 import Transaction from "./Transaction";
 import TransactionSort from "./TransactionSort";
 import { sortTransactions } from "../utils/sortTransactions";
+import { TransactionType } from "../types/types";
 
 type TransactionProps = {
   sortMethod: string;
@@ -20,8 +21,10 @@ export default function TransacationsList({
       {transactionsData.transactions.length > 0 &&
         transactionsData.transactions
           .slice()
-          .sort((a, b) => sortTransactions(a, b, sortMethod))
-          .map((transaction) => {
+          .sort((a: TransactionType, b: TransactionType) =>
+            sortTransactions(a, b, sortMethod)
+          )
+          .map((transaction: TransactionType) => {
             return (
               <Transaction key={transaction._id} transaction={transaction} />
             );

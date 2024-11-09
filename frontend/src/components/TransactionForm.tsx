@@ -48,6 +48,17 @@ export default function TransactionForm() {
           required
         />
       </div>
+      <div className="entry-description">
+        <label htmlFor="description">Description</label>
+        <input
+          id="description"
+          type="text"
+          placeholder={"Description"}
+          value={description}
+          onChange={(e) => setDescription(e.target.value)}
+          required
+        />
+      </div>
       <div className="entry-details">
         <div className="price-input-container">
           <label htmlFor="price">Price</label>
@@ -72,7 +83,7 @@ export default function TransactionForm() {
           />
         </div>
         <div>
-          <label htmlFor="type">Expense</label>
+          <label htmlFor="type">Expense?</label>
           <input
             id="type"
             type="checkbox"
@@ -81,17 +92,7 @@ export default function TransactionForm() {
           />
         </div>
       </div>
-      <div className="entry-description">
-        <label htmlFor="description">Description</label>
-        <input
-          id="description"
-          type="text"
-          placeholder={"Description"}
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          required
-        />
-      </div>
+
       <button type="submit">Add New Transation</button>
     </form>
   );
