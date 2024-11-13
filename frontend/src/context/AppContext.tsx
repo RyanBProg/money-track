@@ -16,7 +16,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     useState<Transactions>(initialData);
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [balance, setBalance] = useState<string>("");
+  const [balance, setBalance] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
   const limit = 10;
 

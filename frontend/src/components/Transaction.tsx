@@ -47,7 +47,7 @@ function TransactionView({ transaction, setEditMode }: TransactionProps) {
     const data = await makeRequest("DELETE", body, currentPage, limit);
     setTransactionsData(data);
     setTotalPages(data.totalPages);
-    setBalance(data.total.toFixed(2).toString());
+    setBalance(data.total);
 
     // go back a page if you delete the last transaction
     if (transLength === 1 && currentPage !== 1) {
@@ -88,7 +88,7 @@ function TransactionEdit({ transaction, setEditMode }: TransactionProps) {
     setBalance,
   } = useAppContext();
   const [name, setName] = useState(transaction.name);
-  const [price, setPrice] = useState(transaction.price.toFixed(2));
+  const [price, setPrice] = useState(transaction.price);
   const [date, setDate] = useState(transaction.date);
   const [isExpense, setIsExpense] = useState(transaction.isExpense);
   const [description, setDescription] = useState(transaction.description);
@@ -96,18 +96,20 @@ function TransactionEdit({ transaction, setEditMode }: TransactionProps) {
   async function updateTransaction(e: FormEvent) {
     e.preventDefault();
     setLoading(true);
+
+    let adjustedPrice = isExpense ? -price : price;
+
     const body = {
       name,
-      price,
+      adjustedPrice,
       description,
       date,
-      isExpense,
       id: transaction._id,
     };
     const data = await makeRequest("PUT", body, currentPage, limit);
     setTransactionsData(data);
     setTotalPages(data.totalPages);
-    setBalance(data.total.toFixed(2).toString());
+    setBalance(data.total);
     setEditMode(false);
     setLoading(false);
   }
@@ -145,7 +147,7 @@ function TransactionEdit({ transaction, setEditMode }: TransactionProps) {
             type="text"
             className="price-input"
             value={price}
-            onChange={(e) => setPrice(e.target.value)}
+            onChange={(e) => setPrice(parseInt(e.target.value))}
             required
           />
         </div>

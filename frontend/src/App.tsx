@@ -26,15 +26,15 @@ export default function App() {
       const data = await makeRequest("GET", undefined, currentPage, limit);
       setTransactionsData(data);
       setTotalPages(data.totalPages);
-      setBalance(data.total.toFixed(2).toString());
+      setBalance(data.total);
       setLoading(false);
     }
 
     fetchData();
   }, [currentPage]);
 
-  const balanceWhole = balance.split(".")[0];
-  const balanceDecimal = balance.split(".")[1];
+  const balanceWhole = balance.toFixed(2).split(".")[0];
+  const balanceDecimal = balance.toFixed(2).split(".")[1];
 
   return (
     <main>

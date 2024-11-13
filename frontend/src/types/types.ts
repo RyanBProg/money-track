@@ -18,10 +18,9 @@ export type Transactions = {
 
 export type RequestBody = {
   name?: string;
-  price?: string;
+  price?: number;
   description?: string;
   date?: string;
-  isExpense?: boolean;
   id?: string;
 };
 
@@ -32,8 +31,8 @@ export type AppContextType = {
   setLoading: React.Dispatch<React.SetStateAction<boolean>>;
   currentPage: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
-  balance: string;
-  setBalance: React.Dispatch<React.SetStateAction<string>>;
+  balance: number;
+  setBalance: React.Dispatch<React.SetStateAction<number>>;
   totalPages: number;
   setTotalPages: React.Dispatch<React.SetStateAction<number>>;
   limit: number;

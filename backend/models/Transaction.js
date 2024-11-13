@@ -6,7 +6,6 @@ const TransactionSchema = new Schema({
   price: { type: Number, required: true },
   description: { type: String, required: true },
   date: { type: String, required: true },
-  isExpense: { type: Boolean, required: true },
 });
 
 const TransactionModel = model("Transaction", TransactionSchema);

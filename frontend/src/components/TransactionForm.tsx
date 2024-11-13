@@ -21,11 +21,13 @@ export default function TransactionForm() {
     e.preventDefault();
     setLoading(true);
 
-    const body = { name, price, description, date, isExpense };
+    let adjustedPrice = isExpense ? -price : price;
+
+    const body = { name, adjustedPrice, description, date };
     const data = await makeRequest("POST", body, currentPage, limit);
     setTransactionsData(data);
     setTotalPages(data.totalPages);
-    setBalance(data.total.toFixed(2).toString());
+    setBalance(data.total);
 
     setLoading(false);
     setName("");

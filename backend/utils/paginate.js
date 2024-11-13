@@ -2,21 +2,14 @@ async function paginate(Model, page, limit) {
   const [transactions, totalItems, transTotal] = await Promise.all([
     Model.find()
       .skip((page - 1) * limit)
+      .sort({ price: 1 })
       .limit(limit),
     Model.countDocuments(),
     Model.aggregate([
       {
         $group: {
           _id: null,
-          total: {
-            $sum: {
-              $cond: {
-                if: { $eq: ["$isExpense", true] },
-                then: { $multiply: ["$price", -1] },
-                else: "$price",
-              },
-            },
-          },
+          total: { $sum: "$price" },
         },
       },
     ]),

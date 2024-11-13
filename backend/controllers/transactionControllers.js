@@ -17,14 +17,13 @@ async function createTransaction(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
-    const { name, price, description, date, isExpense } = req.body;
+    const { name, price, description, date } = req.body;
 
     await TransactionModel.create({
       name,
       price,
       description,
       date,
-      isExpense,
     });
 
     const response = await paginate(TransactionModel, page, limit);
@@ -38,11 +37,11 @@ async function updateTransaction(req, res) {
   try {
     const page = parseInt(req.query.page) || 1;
     const limit = parseInt(req.query.limit) || 10;
-    const { id, name, price, description, date, isExpense } = req.body;
+    const { id, name, price, description, date } = req.body;
 
     await TransactionModel.updateOne(
       { _id: id },
-      { $set: { name, price, description, date, isExpense } }
+      { $set: { name, price, description, date } }
     );
 
     const response = await paginate(TransactionModel, page, limit);
