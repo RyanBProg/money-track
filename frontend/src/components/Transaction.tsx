@@ -28,9 +28,11 @@ type TransactionProps = {
 
 function TransactionView({ transaction, setEditMode }: TransactionProps) {
   const {
+    transactionsData,
     setTransactionsData,
     setLoading,
     currentPage,
+    setCurrentPage,
     limit,
     setTotalPages,
     setBalance,
@@ -38,12 +40,20 @@ function TransactionView({ transaction, setEditMode }: TransactionProps) {
 
   async function deleteTransaction() {
     setLoading(true);
+
+    const transLength = transactionsData.transactions.length;
+
     const body = { id: transaction._id };
     const data = await makeRequest("DELETE", body, currentPage, limit);
     setTransactionsData(data);
     setTotalPages(data.totalPages);
     setBalance(data.total.toFixed(2).toString());
-    setEditMode(false);
+
+    // go back a page if you delete the last transaction
+    if (transLength === 1 && currentPage !== 1) {
+      setCurrentPage((prev) => prev - 1);
+    }
+
     setLoading(false);
   }
 
