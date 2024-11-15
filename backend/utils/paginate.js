@@ -1,8 +1,13 @@
-async function paginate(Model, page, limit) {
+async function paginate(Model, query) {
+  const page = parseInt(req.query.page) || 1;
+  const limit = parseInt(req.query.limit) || 10;
+  const { sortBy = "name", order = "asc" } = req.query;
+  const sortOrder = order === "asc" ? 1 : -1;
+
   const [transactions, totalItems, transTotal] = await Promise.all([
     Model.find()
       .skip((page - 1) * limit)
-      .sort({ price: 1 })
+      .sort({ [sortBy]: sortOrder })
       .limit(limit),
     Model.countDocuments(),
     Model.aggregate([
