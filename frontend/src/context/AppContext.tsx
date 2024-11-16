@@ -1,24 +1,22 @@
 import { createContext, useContext, useState, ReactNode } from "react";
 import { AppContextType, Transactions } from "../types/types";
+import {
+  DEFAULT_SORT,
+  DEFAULT_TRANSACTION_DATA,
+  PAGINATION_LIMIT,
+} from "../utils/defaults";
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
 
-const initialData = {
-  transactions: [],
-  total: 0,
-  totalItems: 0,
-  totalPages: 0,
-  currentPage: 1,
-};
-
 export const AppProvider = ({ children }: { children: ReactNode }) => {
-  const [transactionsData, setTransactionsData] =
-    useState<Transactions>(initialData);
+  const [transactionsData, setTransactionsData] = useState<Transactions>(
+    DEFAULT_TRANSACTION_DATA
+  );
   const [loading, setLoading] = useState<boolean>(true);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [balance, setBalance] = useState<number>(0);
   const [totalPages, setTotalPages] = useState<number>(0);
-  const limit = 10;
+  const [sortMethod, setSortMethod] = useState(DEFAULT_SORT);
 
   const valueProp: AppContextType = {
     transactionsData,
@@ -31,7 +29,9 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
     setBalance,
     totalPages,
     setTotalPages,
-    limit,
+    limit: PAGINATION_LIMIT,
+    sortMethod,
+    setSortMethod,
   };
 
   return (

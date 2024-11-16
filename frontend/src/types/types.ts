@@ -4,7 +4,6 @@ export type TransactionType = {
   price: number;
   description: string;
   date: string;
-  isExpense: boolean;
   __v: number;
 };
 
@@ -36,4 +35,6 @@ export type AppContextType = {
   totalPages: number;
   setTotalPages: React.Dispatch<React.SetStateAction<number>>;
   limit: number;
+  sortMethod: string;
+  setSortMethod: React.Dispatch<React.SetStateAction<string>>;
 };

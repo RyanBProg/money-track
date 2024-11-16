@@ -1,9 +1,8 @@
-type Props = {
-  sortMethod: string;
-  setSortMethod: React.Dispatch<React.SetStateAction<string>>;
-};
+import { useAppContext } from "../context/AppContext";
 
-export default function TransactionSort({ sortMethod, setSortMethod }: Props) {
+export default function TransactionSort() {
+  const { sortMethod, setSortMethod } = useAppContext();
+
   return (
     <div className="transaction-sort">
       <label htmlFor="sort-select">Sort: </label>
@@ -11,10 +10,10 @@ export default function TransactionSort({ sortMethod, setSortMethod }: Props) {
         id="sort-select"
         value={sortMethod}
         onChange={(e) => setSortMethod(e.target.value)}>
-        <option value="date-asc">Date Ascending</option>
         <option value="date-dec">Date Decending</option>
-        <option value="price-asc">Price Ascending</option>
+        <option value="date-asc">Date Ascending</option>
         <option value="price-dec">Price Decending</option>
+        <option value="price-asc">Price Ascending</option>
       </select>
     </div>
   );

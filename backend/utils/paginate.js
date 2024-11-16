@@ -1,7 +1,7 @@
 async function paginate(Model, query) {
-  const page = parseInt(req.query.page) || 1;
-  const limit = parseInt(req.query.limit) || 10;
-  const { sortBy = "name", order = "asc" } = req.query;
+  const page = parseInt(query.page) || 1;
+  const limit = parseInt(query.limit) || 10;
+  const { sortBy = "date", order = "dec" } = query;
   const sortOrder = order === "asc" ? 1 : -1;
 
   const [transactions, totalItems, transTotal] = await Promise.all([

@@ -10,6 +10,7 @@ export default function TransactionForm() {
     limit,
     setTotalPages,
     setBalance,
+    sortMethod,
   } = useAppContext();
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
@@ -21,10 +22,16 @@ export default function TransactionForm() {
     e.preventDefault();
     setLoading(true);
 
-    let adjustedPrice = isExpense ? -price : price;
+    const adjustedPrice = isExpense ? -parseInt(price) : parseInt(price);
 
-    const body = { name, adjustedPrice, description, date };
-    const data = await makeRequest("POST", body, currentPage, limit);
+    const body = { name, price: adjustedPrice, description, date, sortMethod };
+    const data = await makeRequest(
+      "POST",
+      body,
+      currentPage,
+      limit,
+      sortMethod
+    );
     setTransactionsData(data);
     setTotalPages(data.totalPages);
     setBalance(data.total);

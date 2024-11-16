@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import "./App.css";
 import TransacationsList from "./components/TransacationsList";
 import TransactionForm from "./components/TransactionForm";
@@ -7,8 +7,6 @@ import { makeRequest } from "./utils/makeRequest";
 import { useAppContext } from "./context/AppContext";
 
 export default function App() {
-  const [sortMethod, setSortMethod] = useState("");
-
   const {
     loading,
     setLoading,
@@ -18,12 +16,19 @@ export default function App() {
     setBalance,
     currentPage,
     limit,
+    sortMethod,
   } = useAppContext();
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true);
-      const data = await makeRequest("GET", undefined, currentPage, limit);
+      const data = await makeRequest(
+        "GET",
+        undefined,
+        currentPage,
+        limit,
+        sortMethod
+      );
       setTransactionsData(data);
       setTotalPages(data.totalPages);
       setBalance(data.total);
@@ -31,7 +36,7 @@ export default function App() {
     }
 
     fetchData();
-  }, [currentPage]);
+  }, [currentPage, sortMethod]);
 
   const balanceWhole = balance.toFixed(2).split(".")[0];
   const balanceDecimal = balance.toFixed(2).split(".")[1];
@@ -47,10 +52,7 @@ export default function App() {
         <p className="loading">Loading...</p>
       ) : (
         <>
-          <TransacationsList
-            sortMethod={sortMethod}
-            setSortMethod={setSortMethod}
-          />
+          <TransacationsList />
           <Pagination />
         </>
       )}
