@@ -19,7 +19,7 @@ export default function TransactionEdit({ transaction, setEditMode }: Props) {
     sortMethod,
   } = useAppContext();
   const [name, setName] = useState(transaction.name);
-  const [date, setDate] = useState(transaction.date);
+  const [date, setDate] = useState(transaction.date.slice(0, 10));
   const [isExpense, setIsExpense] = useState(transaction.price < 0);
   const [description, setDescription] = useState(transaction.description);
 
